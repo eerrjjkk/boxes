@@ -16,16 +16,10 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #____________________________________________________________________________
 #
-#   File:           $(TOPDIR)/feeds/packages/utils/boxes/Makefile
-#   Date created:   2014-09-12 23:28
-#   Author:         Lu Weifeng <lyredsoft@gmail.com>
-#   Usage:
+#   File:           $(TOPDIR)/package/boxes/Makefile
 # +-------------------------------------------------------------------------+
-# |$cd $(TOPDIR)                                                            |
-# |$./scripts/feeds update -i                                               |
-# |$./scripts/feeds install boxes                                           |
 # |$apt-get install binutils-multiarch                                      |
-# |$make package/boxes/compile package/index                                |
+# |$make package/boxes/compile V=s                                |
 # |$scp  $(TOPDIR)/bin/ar71xx/packages/boxes_1.1-1_ar71xx.ipk  openwrt:/tmp/|
 # |$opkg install --force-depends /tmp/boxes_1.1-1_ar71xx.ipk                |
 # +-------------------------------------------------------------------------+
@@ -36,7 +30,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=boxes
 PKG_VERSION:=2.1.1
 PKG_RELEASE:=1
-PKG_BUILD_DIR:=$(PKG_NAME)-$(PKG_VERSION).$(PKG_RELEASE)
+#PKG_BUILD_DIR:=$(PKG_NAME)-$(PKG_VERSION).$(PKG_RELEASE)
 
 
 PKG_SOURCE:=v2.1.1.tar.gz
@@ -47,6 +41,7 @@ define Package/boxes
 	SECTION:=utils
 	CATEGORY:=Utilities
 	TITLE:=HW
+	DEPENDS:=+libpcre2-32 +libunistring
 endef
 define Package/boxes/description
 boxes
@@ -56,7 +51,7 @@ define Package/boxes/Build/Compile
 endef
 define Package/boxes/install
 	$(INSTALL_DIR) $(1)/bin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/boxes $(1)/bin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/out/boxes $(1)/bin/
 
 endef
 $(eval $(call BuildPackage,boxes))
