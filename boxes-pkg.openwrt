@@ -35,6 +35,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=v2.1.1.tar.gz
 PKG_SOURCE_URL:=https://github.com/ascii-boxes/boxes/archive/refs/tags/
+PKG_HASH:=95ae6b46e057a79c6414b8c0b5b561c3e9d886ab8123a4085d256edccce625f9
 
 include $(INCLUDE_DIR)/package.mk
 define Package/boxes
